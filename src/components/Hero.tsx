@@ -166,13 +166,13 @@ const Hero = () => {
           borderRadius: "0% 0% 0% 0%",
         },
         {
-          clipPath: "polygon(14% 0, 72% 0, 85% 85%, 0 80%)",
-          ease: "power1.inOut",
+          clipPath: "polygon(20% 0, 72% 0, 85% 85%, 0 90%)",
+          ease: "power1.out",
           scrollTrigger: {
             trigger: "#video-frame",
             start: "center center",
-            end: "bottom center",
-            scrub: true,
+            end: "bottom 30%",
+            scrub: 1,
           },
         }
       );
@@ -214,7 +214,7 @@ const Hero = () => {
       <div
         ref={videoFrameRef}
         id="video-frame"
-        className="relative w-full h-screen overflow-hidden"
+        className="relative w-full h-screen overflow-hidden border border-black"
         style={{
           perspective: 1000,
           transformStyle: "preserve-3d",
