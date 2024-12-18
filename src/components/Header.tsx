@@ -41,7 +41,7 @@ const Header = () => {
       <div
         id="navbar-container"
         className={`w-full px-2 2xl:px-8 py-2 rounded-lg flex items-center justify-between ${
-          isFloatingNav && "bg-black border"
+          isFloatingNav && "bg-black border border-gray-500"
         }`}
       >
         <div className="flex items-center gap-6">

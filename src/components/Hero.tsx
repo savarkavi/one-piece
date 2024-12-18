@@ -155,7 +155,7 @@ const Hero = () => {
         gsap.fromTo(
           `#hero-text-${currentIndex}`,
           { opacity: 0, x: -300 },
-          { opacity: 1, x: 0, ease: "back.out" }
+          { opacity: 1, x: 0, ease: "back.out", duration: 0.7 }
         );
       }
 
@@ -163,10 +163,13 @@ const Hero = () => {
         `#video-frame`,
         {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          borderRadius: "0% 0% 0% 0%",
         },
         {
-          clipPath: "polygon(20% 0, 72% 0, 85% 85%, 0 90%)",
+          clipPath:
+            width >= 1536
+              ? "polygon(20% 0, 72% 0, 85% 85%, 0 90%)"
+              : "polygon(20% 0, 80% 0, 90% 85%, 10% 85%)",
+
           ease: "power1.out",
           scrollTrigger: {
             trigger: "#video-frame",
@@ -278,7 +281,7 @@ const Hero = () => {
           <p className="font-robert-medium text-sm 2xl:text-2xl">
             Welcome to the world of <br /> Pirates and Dreams
           </p>
-          <Button classNames="w-[120px] 2xl:w-[180px] mr-3 2xl:mr-0 2xl:mt-8 py-2 2xl:py-3 bg-amber-300 text-base text-[10px] 2xl:text-base">
+          <Button classNames="w-[120px] 2xl:w-[180px] mr-3 2xl:mr-0 2xl:mt-8 py-2 2xl:py-3 bg-amber-300 text-[10px] 2xl:text-base">
             Watch Now
           </Button>
         </div>

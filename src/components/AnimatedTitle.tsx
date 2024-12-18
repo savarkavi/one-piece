@@ -18,7 +18,7 @@ const AnimatedTitle = ({ title }: AnimatedTitleProps) => {
       .timeline({
         scrollTrigger: {
           trigger: "#animate-title",
-          start: "200 bottom",
+          start: "100 bottom",
           end: "center bottom",
           toggleActions: "play none none reverse",
         },
@@ -31,15 +31,30 @@ const AnimatedTitle = ({ title }: AnimatedTitleProps) => {
   });
 
   return (
-    <div id="animate-title">
-      {title.split("<br />").map((item, i) => (
-        <p
-          key={i}
-          className="text-[120px] font-zentry font-bold uppercase leading-none text-center"
-        >
-          {item}
-        </p>
-      ))}
+    <div
+      style={{
+        perspective: 1000,
+        transformStyle: "preserve-3d",
+        perspectiveOrigin: "center center",
+      }}
+    >
+      <div
+        id="animate-title"
+        style={{
+          perspective: 1000,
+          transformStyle: "preserve-3d",
+          perspectiveOrigin: "center center",
+        }}
+      >
+        {title.split("<br />").map((item, i) => (
+          <p
+            key={i}
+            className="text-5xl 2xl:text-[120px] font-zentry font-bold uppercase leading-none text-center"
+          >
+            {item}
+          </p>
+        ))}
+      </div>
     </div>
   );
 };
