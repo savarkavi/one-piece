@@ -1,4 +1,5 @@
 import About from "@/components/About";
+import DevilFruits from "@/components/DevilFruits";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import World from "@/components/World";
@@ -10,7 +11,8 @@ export default function Home() {
       <Hero />
       <About />
       <World />
-      <div className="h-screen w-full"></div>
+      <DevilFruits />
+      <div className="h-screen w-full bg-[#EDFF66]"></div>
     </div>
   );
 }

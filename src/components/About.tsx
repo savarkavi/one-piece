@@ -32,7 +32,10 @@ const About = () => {
       <h2 className="2xl:mt-24 font-general uppercase text-sm">
         Welcome to One Piece
       </h2>
-      <AnimatedTitle title="Discover the world's<br />most popular Anime" />
+      <AnimatedTitle
+        title="Discover the world's<br />most popular Anime"
+        styles="text-center"
+      />
       <div
         id="about-img-container"
         className="w-screen h-screen flex justify-center items-center"

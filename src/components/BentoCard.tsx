@@ -32,10 +32,9 @@ const BentoCard = ({
         },
       })
       .from(itemRef.current, {
-        rotateX: "-20deg",
+        rotateX: "-10deg",
         opacity: 0,
         duration: 1,
-        transformOrigin: "top",
       });
   });
 

@@ -1,8 +1,24 @@
+"use client";
+
+import { useGSAP } from "@gsap/react";
 import BentoCard from "./BentoCard";
+import gsap from "gsap";
 
 const World = () => {
+  useGSAP(() => {
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: "#world",
+          start: "bottom 80%",
+          toggleActions: "play none none reset",
+        },
+      })
+      .to("#world", { backgroundColor: "#EDFF66" });
+  });
+
   return (
-    <div className="min-h-screen bg-black py-32 px-6">
+    <div id="world" className="min-h-screen bg-black py-32 px-6">
       <div
         className="max-w-[1536px] mx-auto"
         style={{
