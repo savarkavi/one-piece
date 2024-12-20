@@ -51,7 +51,7 @@ const BentoCard = ({
       const tiltY = (relativeX - 0.5) * -5;
 
       gsap.to(itemRef.current, {
-        transform: ` rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.95, 0.95, 0.95)`,
+        transform: `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.95, 0.95, 0.95)`,
         ease: "none",
       });
     }
@@ -59,7 +59,7 @@ const BentoCard = ({
 
   const handleMouseLeave = contextSafe(() => {
     gsap.to(itemRef.current, {
-      transform: ` rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`,
+      transform: `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`,
       ease: "none",
     });
   });
