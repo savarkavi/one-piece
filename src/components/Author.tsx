@@ -7,16 +7,19 @@ import gsap from "gsap";
 import { useRef } from "react";
 
 const Author = () => {
-  const { contextSafe } = useGSAP();
-
   const boxRef1 = useRef<HTMLDivElement>(null);
   const boxRef2 = useRef<HTMLDivElement>(null);
   const boxRef3 = useRef<HTMLDivElement>(null);
 
+  const { contextSafe } = useGSAP(() => {
+    gsap.set(".img-1, .img-2, .img-3", { opacity: 0 });
+  });
+
   const handleMouseMove = contextSafe(
     (
       e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-      itemRef: React.RefObject<HTMLDivElement | null>
+      itemRef: React.RefObject<HTMLDivElement | null>,
+      image: string
     ) => {
       if (!itemRef.current) return;
       const { left, top, width, height } =
@@ -29,22 +32,24 @@ const Author = () => {
       const tiltY = (relativeX - 0.5) * -50;
 
       gsap.to(itemRef.current, {
-        transform: `translate3d(0, 0, 200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
-        width: 300,
-        height: 300,
+        transform: `translate3d(0, 0, 200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(5, 5, 5)`,
+        duration: 0.2,
         ease: "none",
       });
+
+      gsap.to(image, { opacity: 1, duration: 0.2 });
     }
   );
 
   const handleMouseLeave = contextSafe(
-    (itemRef: React.RefObject<HTMLDivElement | null>) => {
+    (itemRef: React.RefObject<HTMLDivElement | null>, image: string) => {
       gsap.to(itemRef.current, {
-        transform: `translate3d(0, 0, 0)  rotateX(0deg) rotateY(0deg)`,
-        width: 42,
-        height: 42,
+        transform: `translate3d(0, 0, 0)  rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`,
+        duration: 0.2,
         ease: "none",
       });
+
+      gsap.to(image, { opacity: 0, duration: 0.2 });
     }
   );
 
@@ -66,39 +71,67 @@ const Author = () => {
           <p>artist</p>
           <div
             ref={boxRef1}
-            onMouseMove={(e) => handleMouseMove(e, boxRef1)}
-            onMouseLeave={() => handleMouseLeave(boxRef1)}
-            className="absolute w-12 h-12 bg-black rounded-lg origin-center"
+            onMouseMove={(e) => handleMouseMove(e, boxRef1, ".img-1")}
+            onMouseLeave={() => handleMouseLeave(boxRef1, ".img-1")}
+            className="relative w-12 h-12 bg-black rounded-lg"
           >
             <Image
               src="/author-img1.jpg"
               alt="author-img"
               fill
-              className="object-cover rounded-lg"
+              className="object-cover rounded-lg img-1"
             />
           </div>
           <p>since adolescence,</p>
         </div>
         <p>Oda began working for</p>
-        <div className="flex gap-4 justify-center items-center">
+        <div
+          className="flex gap-4 justify-center items-center"
+          style={{
+            perspective: 1000,
+            transformStyle: "preserve-3d",
+            perspectiveOrigin: "center center",
+          }}
+        >
           <p>Shueisha&apos;s Shonen Jump</p>
           <div
-            className="w-12 h-12 bg-black rounded-lg"
+            className="relative w-12 h-12 bg-black rounded-lg"
             ref={boxRef2}
-            onMouseEnter={(e) => handleMouseMove(e, boxRef2)}
-            onMouseLeave={() => handleMouseLeave(boxRef2)}
-          ></div>
+            onMouseMove={(e) => handleMouseMove(e, boxRef2, ".img-2")}
+            onMouseLeave={() => handleMouseLeave(boxRef2, ".img-2")}
+          >
+            <Image
+              src="/author-img2.jpg"
+              alt="author-img"
+              fill
+              className="object-cover rounded-lg img-2"
+            />
+          </div>
         </div>
         <p>at 17 and currently stands</p>
         <p>as one of the world&apos;s most</p>
-        <div className="flex gap-4 justify-center items-center">
+        <div
+          className="flex gap-4 justify-center items-center"
+          style={{
+            perspective: 1000,
+            transformStyle: "preserve-3d",
+            perspectiveOrigin: "center center",
+          }}
+        >
           <p>prominent</p>
           <div
-            className="w-12 h-12 bg-black rounded-lg"
+            className="relative w-12 h-12 bg-black rounded-lg"
             ref={boxRef3}
-            onMouseEnter={(e) => handleMouseMove(e, boxRef3)}
-            onMouseLeave={() => handleMouseLeave(boxRef3)}
-          ></div>
+            onMouseMove={(e) => handleMouseMove(e, boxRef3, ".img-3")}
+            onMouseLeave={() => handleMouseLeave(boxRef3, ".img-3")}
+          >
+            <Image
+              src="/author-img3.jpg"
+              alt="author-img"
+              fill
+              className="object-cover rounded-lg img-3"
+            />
+          </div>
           <p>mangaka.</p>
         </div>
       </div>
