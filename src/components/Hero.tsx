@@ -217,7 +217,7 @@ const Hero = () => {
       <div
         ref={videoFrameRef}
         id="video-frame"
-        className="relative w-full h-screen overflow-hidden border border-black"
+        className="relative w-full h-screen overflow-hidden border border-black bg-blue-600"
         style={{
           perspective: 1000,
           transformStyle: "preserve-3d",

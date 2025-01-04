@@ -34,14 +34,7 @@ const AnimatedTitle = ({ title, styles }: AnimatedTitleProps) => {
   });
 
   return (
-    <div
-      ref={titleRef}
-      style={{
-        perspective: 1000,
-        transformStyle: "preserve-3d",
-        perspectiveOrigin: "center center",
-      }}
-    >
+    <div ref={titleRef}>
       <div
         id="animate-title"
         style={{

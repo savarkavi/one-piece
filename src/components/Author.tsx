@@ -5,14 +5,37 @@ import Button from "./Button";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 const Author = () => {
   const boxRef1 = useRef<HTMLDivElement>(null);
   const boxRef2 = useRef<HTMLDivElement>(null);
   const boxRef3 = useRef<HTMLDivElement>(null);
 
+  const smallScreen = useMediaQuery("(max-width: 1280px)");
+
   const { contextSafe } = useGSAP(() => {
     gsap.set(".img-1, .img-2, .img-3", { opacity: 0 });
+
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: "#author",
+          start: smallScreen ? "top top" : "152 top",
+          toggleActions: "play none none reset",
+        },
+      })
+      .to("#author", { backgroundColor: "black" })
+      .to(".text-container", { color: "white" }, 0)
+      .to(".section-title", { color: "white" }, 0)
+      .to(
+        [boxRef1.current, boxRef2.current, boxRef3.current, ".author-btn"],
+        {
+          backgroundColor: "white",
+          color: "black",
+        },
+        0
+      );
   });
 
   const handleMouseMove = contextSafe(
@@ -53,89 +76,124 @@ const Author = () => {
     }
   );
 
+  const handleMouseClick = contextSafe(
+    (itemRef: React.RefObject<HTMLDivElement | null>, image: string) => {
+      gsap.to(itemRef.current, {
+        scale: 5,
+        duration: 0.2,
+        ease: "none",
+      });
+
+      gsap.to(image, { opacity: 1, duration: 0.2 });
+    }
+  );
+
   return (
-    <div className="min-h-screen flex flex-col items-center gap-10">
-      <h2 className="mt-8 2xl:mt-24 font-general uppercase text-sm">
+    <div
+      id="author"
+      className="min-h-screen flex flex-col items-center gap-10 pb-48 justify-center"
+    >
+      <h2 className="section-title mt-8 2xl:mt-24 font-general uppercase text-sm">
         About the author
       </h2>
-      <div className="max-w-[1000px] text-8xl font-zentry mx-auto text-center">
+      <div className="w-full px-4 xl:p-0 max-w-[1000px] text-4xl 2xl:text-8xl font-zentry mx-auto text-center text-container">
         <p className="">A dedicated writer and</p>
-        <div
-          className="flex gap-4 justify-center items-center relative"
-          style={{
-            perspective: 1000,
-            transformStyle: "preserve-3d",
-            perspectiveOrigin: "center center",
-          }}
-        >
+        <div className="flex gap-4 justify-center items-center relative flex-wrap">
           <p>artist</p>
           <div
-            ref={boxRef1}
-            onMouseMove={(e) => handleMouseMove(e, boxRef1, ".img-1")}
-            onMouseLeave={() => handleMouseLeave(boxRef1, ".img-1")}
-            className="relative w-12 h-12 bg-black rounded-lg"
+            style={{
+              perspective: 1000,
+              transformStyle: "preserve-3d",
+              perspectiveOrigin: "center center",
+            }}
           >
-            <Image
-              src="/author-img1.jpg"
-              alt="author-img"
-              fill
-              className="object-cover rounded-lg img-1"
-            />
+            <div
+              ref={boxRef1}
+              onMouseMove={(e) =>
+                smallScreen ? {} : handleMouseMove(e, boxRef1, ".img-1")
+              }
+              onClick={() =>
+                smallScreen ? handleMouseClick(boxRef1, ".img-1") : {}
+              }
+              onMouseLeave={() => handleMouseLeave(boxRef1, ".img-1")}
+              className="relative w-6 xl:w-12 h-6 xl:h-12 bg-black rounded-md xl:rounded-lg"
+            >
+              <Image
+                src="/author-img1.jpg"
+                alt="author-img"
+                fill
+                className="object-cover rounded-sm xl:rounded-lg img-1"
+              />
+            </div>
           </div>
-          <p>since adolescence,</p>
+          <p>since</p>
+          <p>adolescence,</p>
         </div>
         <p>Oda began working for</p>
-        <div
-          className="flex gap-4 justify-center items-center"
-          style={{
-            perspective: 1000,
-            transformStyle: "preserve-3d",
-            perspectiveOrigin: "center center",
-          }}
-        >
-          <p>Shueisha&apos;s Shonen Jump</p>
+        <div className="flex gap-4 justify-center items-center flex-wrap">
+          <p>Shueisha&apos;s</p>
           <div
-            className="relative w-12 h-12 bg-black rounded-lg"
-            ref={boxRef2}
-            onMouseMove={(e) => handleMouseMove(e, boxRef2, ".img-2")}
-            onMouseLeave={() => handleMouseLeave(boxRef2, ".img-2")}
+            style={{
+              perspective: 1000,
+              transformStyle: "preserve-3d",
+              perspectiveOrigin: "center center",
+            }}
           >
-            <Image
-              src="/author-img2.jpg"
-              alt="author-img"
-              fill
-              className="object-cover rounded-lg img-2"
-            />
+            <div
+              className="relative w-6 xl:w-12 h-6 xl:h-12 bg-black rounded-md xl:rounded-lg"
+              ref={boxRef2}
+              onMouseMove={(e) =>
+                smallScreen ? {} : handleMouseMove(e, boxRef2, ".img-2")
+              }
+              onClick={() =>
+                smallScreen ? handleMouseClick(boxRef2, ".img-2") : {}
+              }
+              onMouseLeave={() => handleMouseLeave(boxRef2, ".img-2")}
+            >
+              <Image
+                src="/author-img2.jpg"
+                alt="author-img"
+                fill
+                className="object-cover rounded-sm xl:rounded-lg img-2"
+              />
+            </div>
           </div>
+          <p>Shonen Jump</p>
         </div>
         <p>at 17 and currently stands</p>
         <p>as one of the world&apos;s most</p>
-        <div
-          className="flex gap-4 justify-center items-center"
-          style={{
-            perspective: 1000,
-            transformStyle: "preserve-3d",
-            perspectiveOrigin: "center center",
-          }}
-        >
+        <div className="flex gap-4 justify-center items-center flex-wrap">
           <p>prominent</p>
           <div
-            className="relative w-12 h-12 bg-black rounded-lg"
-            ref={boxRef3}
-            onMouseMove={(e) => handleMouseMove(e, boxRef3, ".img-3")}
-            onMouseLeave={() => handleMouseLeave(boxRef3, ".img-3")}
+            style={{
+              perspective: 1000,
+              transformStyle: "preserve-3d",
+              perspectiveOrigin: "center center",
+            }}
           >
-            <Image
-              src="/author-img3.jpg"
-              alt="author-img"
-              fill
-              className="object-cover rounded-lg img-3"
-            />
+            <div
+              className="relative w-6 xl:w-12 h-6 xl:h-12 bg-black rounded-md xl:rounded-lg"
+              ref={boxRef3}
+              onMouseMove={(e) =>
+                smallScreen ? {} : handleMouseMove(e, boxRef3, ".img-3")
+              }
+              onClick={() =>
+                smallScreen ? handleMouseClick(boxRef3, ".img-3") : {}
+              }
+              onMouseLeave={() => handleMouseLeave(boxRef3, ".img-3")}
+            >
+              <Image
+                src="/author-img3.jpg"
+                alt="author-img"
+                fill
+                className="object-cover rounded-sm xl:rounded-lg img-3"
+              />
+            </div>
           </div>
           <p>mangaka.</p>
         </div>
       </div>
-      <Button classNames="bg-black text-white text-base py-3">
+      <Button classNames="bg-black text-white text-base py-3 author-btn">
         Read Full Story
       </Button>
     </div>

@@ -6,6 +6,7 @@ import { useWindowScroll } from "react-use";
 import { useEffect, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { AlignJustify } from "lucide-react";
 
 const navItems = ["Author", "Manga", "Anime", "About", "Contact"];
 
@@ -44,25 +45,28 @@ const Header = () => {
           isFloatingNav && "bg-black border border-gray-500"
         }`}
       >
-        <div className="flex items-center gap-6">
-          <div className="relative w-12 h-12 2xl:w-16 2xl:h-16">
-            <Image
-              src="/onepiece-logo.png"
-              alt="logo"
-              fill
-              className="object-cover"
-            />
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-6 w-full">
+            <div className="relative w-12 h-12 2xl:w-16 2xl:h-16">
+              <Image
+                src="/onepiece-logo.png"
+                alt="logo"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <Button classNames="bg-white text-[10px] 2xl:text-sm">
+              Products
+            </Button>
+            <Button classNames="bg-white text-[10px] 2xl:text-sm">
+              Wallpapers
+            </Button>
           </div>
-          <Button classNames="bg-white text-[10px] 2xl:text-sm">
-            Products
-          </Button>
-          <Button classNames="bg-white text-[10px] 2xl:text-sm">
-            Wallpapers
-          </Button>
+          <AlignJustify className="xl:hidden" />
         </div>
         <div className="hidden 2xl:flex items-center gap-24 text-sm font-general uppercase">
           {navItems.map((item) => (
-            <h2 className="font-semibold" key={item}>
+            <h2 className="font-semibold cursor-pointer" key={item}>
               {item}
             </h2>
           ))}
